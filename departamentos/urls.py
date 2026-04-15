@@ -5,5 +5,5 @@ urlpatterns = [
     path("", home, name="home"),
     path("departamentos/", departamentos_list, name="departamentos_list"),
     path("departamentos/<int:nro_departamento>/", ver_departamento, name="departamento_detail"),
-    
+    path("departamento/crear/", crear_departamento, name="departamento_create"),
 ]

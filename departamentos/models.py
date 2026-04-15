@@ -10,4 +10,4 @@ class DepartamentosMedicos(models.Model): # nombre de la tabla
     email_dpto = models.EmailField()
     
     def __str__(self):
-        return f"Departamento: {self.nombre} / Nro: {self.nro_departamento}"
+        return f"Departamento: {self.nombre} / Nro: {self.nro_departamento} / Email: {self.email_dpto}"
