@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from departamentos.models import DepartamentosMedicos
-from departamentos.forms import DepartamentoMedicoForm
+from departamentos.forms import DepartamentoMedicoForm, DepartamentoMedicoUpdateForm
 from django.http import Http404
 
 def home(request):
@@ -46,4 +46,40 @@ def crear_departamento(request):
     else:
         form = DepartamentoMedicoForm()
     
-    return render(request, "departamentos/depatarmento_create.html", {"form": form})
+    return render(request, "departamentos/departamento_create.html", {"form": form})
+
+# CRUD
+# C-reate
+# R-ead
+# U-pdate
+# D-elete
+
+def actualizar_departamento(request, nro_departamento): # pk
+    departamento = get_object_or_404(DepartamentosMedicos, nro_departamento=nro_departamento)
+    
+    if request.method == "POST":
+        form = DepartamentoMedicoUpdateForm(request.POST, instance=departamento)
+        if form.is_valid():
+            form.save()
+            return redirect("departamento_detail", nro_departamento=nro_departamento)
+    else:
+        form = DepartamentoMedicoUpdateForm(instance=departamento)
+    
+    return render(request, "departamentos/departamento_create.html", {
+        "form": form,
+        "departamento": departamento,
+        "update": True
+    })
+
+def consulta_eliminar_dpto(request, nro_departamento):
+    return render(request, "departamentos/departamentos_delete.html", {
+        "nro_departamento": nro_departamento
+    })
+
+def eliminar_departamento(request, nro_departamento):
+    departamento = get_object_or_404(DepartamentosMedicos, nro_departamento=nro_departamento)
+    if request.method == "POST":
+        departamento.delete() # QuerySet
+        return redirect("departamentos_list")
+    else:
+        print("error")

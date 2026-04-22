@@ -1,0 +1,33 @@
+{% extends "departamentos/index.html" %}
+
+{% block titulo %}
+<title>Confirmar eliminación</title>
+{% endblock %}
+{% block cartas %} {% endblock %}
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
+    <div class="card card-custom p-5 text-center" style="max-width: 500px; width: 100%;">
+        
+        <h2 class="mb-4">¿Estás seguro?</h2>
+        
+        <p class="mb-4">
+            Esta acción no se puede deshacer. ¿Deseás eliminar este registro?
+        </p>
+
+        <form method="POST" action="{% url 'departamento_delete' nro_departamento %}">
+            {% csrf_token %}
+            
+            <div class="d-flex justify-content-around">
+                <button type="submit" class="btn btn-danger">
+                    Sí, eliminar
+                </button>
+
+                <a href="{% url 'departamentos_list' %}" class="btn btn-secondary">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

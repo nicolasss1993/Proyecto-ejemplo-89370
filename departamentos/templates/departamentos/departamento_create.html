@@ -1,0 +1,69 @@
+{% extends "departamentos/index.html" %}
+
+{% block titulo %} <title>Crear Departamento</title> {% endblock %}
+
+{% block cartas %} {% endblock %}
+
+{% block contenido %}
+
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="card card-custom p-4 w-50">
+            <h3 class="text-center mb-4">
+                {% if not update %}
+                    Crear Departamento Médico
+                {% else %}
+                    Actualizar Departamento Medico
+                {%endif%}
+            </h3>
+            <form method="POST">
+                {% csrf_token %}
+
+                {% if not update %}
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        {{ form.nombre }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Nro Departamento</label>
+                        {{ form.nro_departamento }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        {{ form.email_dpto }}
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Nro Empleados</label>
+                        {{ form.nro_empleados }}
+                    </div>
+                {% else %}
+                    <div class="mb-3">
+                        <label class="form-label">Nombre</label>
+                        {{ form.nombre }}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        {{ form.email_dpto }}
+                    </div>
+                {% endif %}
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a href="{% url 'departamentos_list' %}" class="btn btn-secondary">
+                        Volver
+                    </a>
+
+                    <button type="submit" class="btn btn-custom text-white">
+                        {% if not update %}
+                            Crear
+                        {% else %}
+                            Actualizar
+                        {%endif%}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

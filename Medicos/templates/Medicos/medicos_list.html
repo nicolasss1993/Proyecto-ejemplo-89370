@@ -1,0 +1,32 @@
+{% extends "departamentos/index.html" %}
+
+{% block titulo %}
+<title>Médicos</title>
+{% endblock %}
+{% block cartas %} {% endblock %}
+{% block contenido %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Listado de Médicos</h2>
+
+    <div class="text-end mb-3">
+        <a href="{% url 'medico_create' %}" class="btn btn-success">Nuevo Médico</a>
+    </div>
+
+    <div class="row">
+        {% for medico in medicos_list %}
+            <div class="col-md-4 mb-4">
+                <div class="card card-custom p-3">
+                    <h5>{{ medico.nombre }} {{ medico.apellido }}</h5>
+                    <p>Especialidad: {{ medico.especialidad }}</p>
+
+                    <a href="{% url 'medico_detail' medico.code %}" class="btn btn-primary btn-sm">
+                        Ver detalle
+                    </a>
+                </div>
+            </div>
+        {% empty %}
+            <p>No hay médicos registrados.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

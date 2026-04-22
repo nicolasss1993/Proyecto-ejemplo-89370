@@ -71,6 +71,15 @@
                                 <div class="btn-group">
                                     <a href="{% url 'departamento_detail' departamento.nro_departamento %}" class="btn btn-sm btn-info text-white"> Ver</a>
                                 </div>
+                                <div class="btn-group">
+                                    <a href="{% url 'departamento_update' departamento.nro_departamento %}" class="btn btn-sm btn-warning text-white"> Actualizar</a>
+                                </div>
+                                <div class="btn-group">
+                                    <a
+                                        href="{% url 'consulta_delete' departamento.nro_departamento %}"
+                                        class="btn btn-sm btn-danger text-white"
+                                    > Eliminar</a>
+                                </div>
                             </td>
                         </tr>
                     {% empty %}

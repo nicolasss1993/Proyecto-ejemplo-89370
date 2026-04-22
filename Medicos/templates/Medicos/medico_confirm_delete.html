@@ -1,0 +1,38 @@
+{% extends "departamentos/index.html" %}
+
+{% block titulo %}
+<title>Eliminar Médico</title>
+{% endblock %}
+{% block cartas %} {% endblock %}
+{% block contenido %}
+<div class="container d-flex justify-content-center align-items-center" style="height: 70vh;">
+    
+    <div class="card card-custom p-5 text-center" style="max-width: 500px; width: 100%;">
+        
+        <h2 class="mb-4">¿Eliminar médico?</h2>
+
+        <p>
+            Estás por eliminar a <strong>{{ object.nombre }} {{ object.apellido }}</strong>.
+        </p>
+
+        <p class="text-danger">
+            Esta acción no se puede deshacer.
+        </p>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="d-flex justify-content-around mt-4">
+                <button type="submit" class="btn btn-danger">
+                    Sí, eliminar
+                </button>
+
+                <a href="{% url 'medico_detail' object.code %}" class="btn btn-secondary">
+                    Cancelar
+                </a>
+            </div>
+        </form>
+
+    </div>
+</div>
+{% endblock %}

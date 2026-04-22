@@ -13,7 +13,14 @@ class DepartamentoMedicoForm(forms.ModelForm):
             "nro_empleados": forms.NumberInput(attrs={'class': 'form-control'}),
         }
 
-
+class DepartamentoMedicoUpdateForm(forms.ModelForm):
+    class Meta:
+        model = DepartamentosMedicos
+        fields = ("nombre", "email_dpto")
+        widgets = {
+            "nombre": forms.TextInput(attrs={'class': 'form-control'}),
+            "email_dpto": forms.EmailInput(attrs={'class': 'form-control'}),
+        }
 
 
 
