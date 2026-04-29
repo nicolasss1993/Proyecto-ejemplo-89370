@@ -7,10 +7,10 @@ from django.views.generic import (
     DeleteView
 )
 from Medicos.models import Medico
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
-class MedicoListView(ListView):
+class MedicoListView(LoginRequiredMixin, ListView):
     model = Medico
     template_name = "medicos/medicos_list.html"
     context_object_name = "medicos_list"
@@ -23,7 +23,7 @@ class MedicoListView(ListView):
             query_list = query_list.filter(nombre__icontains=query)
         return query_list
 
-class MedicoDetailView(DetailView):
+class MedicoDetailView(LoginRequiredMixin, DetailView):
     model = Medico
     template_name = "Medicos/medico_detail.html"
     context_object_name = "medico"
@@ -31,7 +31,7 @@ class MedicoDetailView(DetailView):
     slug_url_kwarg = "code"
 
 
-class MedicoCreateView(CreateView):
+class MedicoCreateView(LoginRequiredMixin, CreateView):
     model = Medico
     fields = ["nombre", "apellido", "especialidad"]
     # form_class = MedicoForm
@@ -43,7 +43,7 @@ class MedicoCreateView(CreateView):
             kwargs={"code": self.object.code}
         )
 
-class MedicoUpdateView(UpdateView):
+class MedicoUpdateView(LoginRequiredMixin, UpdateView):
     model = Medico
     fields = ("nombre", "apellido")
     slug_field = "code"
@@ -55,7 +55,7 @@ class MedicoUpdateView(UpdateView):
             kwargs={"code": self.object.code}
         )
 
-class MedicoDeleteView(DeleteView):
+class MedicoDeleteView(LoginRequiredMixin, DeleteView):
     model = Medico
     template_name = "Medicos/medico_confirm_delete.html"
     success_url = reverse_lazy("medico_list")
